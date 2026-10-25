@@ -1,0 +1,268 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile with role-based access privileges for school management",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique user ID" },
+        "email": { "type": "string", "description": "User email address" },
+        "displayName": { "type": "string", "description": "Full name of the user" },
+        "role": { 
+          "type": "string", 
+          "description": "System role determining permissions and privileges",
+          "enum": ["admin", "teacher", "bursar", "transport", "student_parent"]
+        },
+        "photoURL": { "type": "string", "description": "Profile picture URL" },
+        "createdAt": { "type": "string", "description": "Creation ISO timestamp" }
+      },
+      "required": ["id", "email", "role"]
+    },
+    "StudentEntity": {
+      "title": "StudentEntity",
+      "description": "Student primary biodata and academic enrollment record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique student identifier" },
+        "admissionNumber": { "type": "string", "description": "Official admission ID code" },
+        "name": { "type": "string", "description": "Student full name" },
+        "currentClass": { "type": "string", "description": "Current grade or class level" },
+        "gender": { "type": "string", "description": "Gender identity" },
+        "status": { "type": "string", "description": "Active or Inactive enrollment status" }
+      },
+      "required": ["id", "admissionNumber", "name", "currentClass"]
+    },
+    "AcademicRecordEntity": {
+      "title": "AcademicRecordEntity",
+      "description": "Terminal academic continuous assessment marks and conduct remarks",
+      "type": "object",
+      "properties": {
+        "studentId": { "type": "string", "description": "Referenced student ID" },
+        "academicYear": { "type": "string", "description": "Academic calendar year" }
+      },
+      "required": ["studentId", "academicYear"]
+    },
+    "FeeLedgerEntity": {
+      "title": "FeeLedgerEntity",
+      "description": "Tuition fees accounting ledger with term balances and payments",
+      "type": "object",
+      "properties": {
+        "studentId": { "type": "string", "description": "Referenced student ID" },
+        "academicYear": { "type": "string", "description": "Academic calendar year" }
+      },
+      "required": ["studentId", "academicYear"]
+    },
+    "ExamPrepEntity": {
+      "title": "ExamPrepEntity",
+      "description": "National examination candidate registration and mock performance",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique exam prep record ID" },
+        "studentId": { "type": "string", "description": "Referenced student ID" },
+        "examType": { "type": "string", "description": "NPSE, BECE, or WASSCE" }
+      },
+      "required": ["id", "studentId", "examType"]
+    },
+    "TeacherEntity": {
+      "title": "TeacherEntity",
+      "description": "Faculty staff profile and curriculum assignments",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique teacher ID" },
+        "name": { "type": "string", "description": "Faculty member full name" },
+        "role": { "type": "string", "description": "Academic title or specialization" }
+      },
+      "required": ["id", "name"]
+    },
+    "BusEntity": {
+      "title": "BusEntity",
+      "description": "School transportation vehicle details and route parameters",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique bus record ID" },
+        "plateNumber": { "type": "string", "description": "Vehicle registration license plate" },
+        "route": { "type": "string", "description": "Assigned transit corridor or route" }
+      },
+      "required": ["id", "plateNumber"]
+    },
+    "BusAssignmentEntity": {
+      "title": "BusAssignmentEntity",
+      "description": "Student commuter bus seat assignment mapping",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Allocation document ID" }
+      },
+      "required": ["id"]
+    },
+    "AttendanceEntity": {
+      "title": "AttendanceEntity",
+      "description": "Daily student roll-call attendance logs",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Attendance log ID" },
+        "date": { "type": "string", "description": "Date of attendance roll-call" }
+      },
+      "required": ["id", "date"]
+    },
+    "IncidentEntity": {
+      "title": "IncidentEntity",
+      "description": "Student pastoral care and behavioral incident tracking",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Incident record ID" },
+        "studentId": { "type": "string", "description": "Referenced student ID" },
+        "date": { "type": "string", "description": "Date of incident" }
+      },
+      "required": ["id", "studentId", "date"]
+    },
+    "BookEntity": {
+      "title": "BookEntity",
+      "description": "Library resource catalog item",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Book catalog accession ID" },
+        "title": { "type": "string", "description": "Book title" }
+      },
+      "required": ["id", "title"]
+    },
+    "CheckoutEntity": {
+      "title": "CheckoutEntity",
+      "description": "Library book loan checkout and return transaction",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Loan transaction ID" },
+        "bookId": { "type": "string", "description": "Referenced book ID" },
+        "studentId": { "type": "string", "description": "Borrower student ID" }
+      },
+      "required": ["id", "bookId", "studentId"]
+    },
+    "NoticeEntity": {
+      "title": "NoticeEntity",
+      "description": "Institutional bulletin notice and parent SMS broadcast record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Notice bulletin ID" },
+        "title": { "type": "string", "description": "Notice title" },
+        "createdAt": { "type": "string", "description": "Date timestamp" }
+      },
+      "required": ["id", "title"]
+    },
+    "AssignmentEntity": {
+      "title": "AssignmentEntity",
+      "description": "Class academic assignment and homework tasks",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Assignment task ID" },
+        "title": { "type": "string", "description": "Assignment title" }
+      },
+      "required": ["id", "title"]
+    },
+    "SubmissionEntity": {
+      "title": "SubmissionEntity",
+      "description": "Student homework submission and grading result",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Submission record ID" },
+        "assignmentId": { "type": "string", "description": "Associated assignment ID" }
+      },
+      "required": ["id", "assignmentId"]
+    },
+    "AnnouncementEntity": {
+      "title": "AnnouncementEntity",
+      "description": "Public school website announcements and news bulletins",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Announcement post ID" },
+        "title": { "type": "string", "description": "Headline title" }
+      },
+      "required": ["id", "title"]
+    },
+    "ReferenceSnapshotEntity": {
+      "title": "ReferenceSnapshotEntity",
+      "description": "Archived snapshot of school operational records for permanent historical audit and reference uses",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique snapshot archive ID" },
+        "title": { "type": "string", "description": "Descriptive reference label or title" },
+        "notes": { "type": "string", "description": "Administrative notes and audit purpose" },
+        "savedAt": { "type": "string", "description": "ISO timestamp when snapshot was archived" },
+        "savedBy": { "type": "string", "description": "Administrator who created the reference archive" }
+      },
+      "required": ["id", "title", "savedAt", "savedBy"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Stores user account information, profile details, and role assignments"
+    },
+    "/admins/{userId}": {
+      "schema": "UserProfile",
+      "description": "Collection of designated system administrators"
+    },
+    "/students/{studentId}": {
+      "schema": "StudentEntity",
+      "description": "Permanent student records, bio, enrollment, and access credentials"
+    },
+    "/academic_records/{recordId}": {
+      "schema": "AcademicRecordEntity",
+      "description": "Student academic performance, term grades, remarks, and GPA"
+    },
+    "/fee_ledgers/{ledgerId}": {
+      "schema": "FeeLedgerEntity",
+      "description": "Tuition fees, payments, balances, and receipt logs"
+    },
+    "/exam_preps/{prepId}": {
+      "schema": "ExamPrepEntity",
+      "description": "National exam preparation records (NPSE, BECE, WASSCE)"
+    },
+    "/teachers/{teacherId}": {
+      "schema": "TeacherEntity",
+      "description": "Teacher and staff directory, subject assignments, access codes"
+    },
+    "/buses/{busId}": {
+      "schema": "BusEntity",
+      "description": "School transportation fleet vehicles and routes"
+    },
+    "/bus_assignments/{assignmentId}": {
+      "schema": "BusAssignmentEntity",
+      "description": "Student commuter bus allocation mappings"
+    },
+    "/daily_attendance/{recordId}": {
+      "schema": "AttendanceEntity",
+      "description": "Daily roll-call attendance registers"
+    },
+    "/incidents/{incidentId}": {
+      "schema": "IncidentEntity",
+      "description": "Disciplinary records and pastoral care incident logs"
+    },
+    "/library_books/{bookId}": {
+      "schema": "BookEntity",
+      "description": "School library book inventory catalog"
+    },
+    "/library_checkouts/{checkoutId}": {
+      "schema": "CheckoutEntity",
+      "description": "Library book lending transactions and fine records"
+    },
+    "/class_notices/{noticeId}": {
+      "schema": "NoticeEntity",
+      "description": "Class bulletins and parent/student SMS transmission records"
+    },
+    "/assignments/{assignmentId}": {
+      "schema": "AssignmentEntity",
+      "description": "Faculty course homework assignments and rubrics"
+    },
+    "/submissions/{submissionId}": {
+      "schema": "SubmissionEntity",
+      "description": "Student homework submissions and evaluation feedback"
+    },
+    "/announcements/{announcementId}": {
+      "schema": "AnnouncementEntity",
+      "description": "Campus announcements and general bulletins"
+    },
+    "/reference_snapshots/{snapshotId}": {
+      "schema": "ReferenceSnapshotEntity",
+      "description": "Historical audit reference snapshots of school database for institutional archives and reference uses"
+    }
+  }
+}

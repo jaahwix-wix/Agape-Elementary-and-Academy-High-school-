@@ -1,0 +1,10 @@
+{
+  "name": "Agape Elementary and Academy High school ",
+  "description": "Agape Elementary and Academy High school ",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
